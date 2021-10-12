@@ -1,0 +1,33 @@
+### GET STATIC
+
+GET http://localhost:3001
+
+### GET ALL NOTES
+
+GET http://localhost:3001/api/notes
+
+### GET ONE NOTE
+
+GET http://localhost:3001/api/notes/1
+
+### ADD ONE NOTE
+
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+    "content": "VSCODE TEST CLIENT note"
+}
+
+### UPDATE ONE NOTE
+
+PUT http://localhost:3001/api/notes/4
+Content-Type: application/json
+
+{
+    "content": "VSCODE TEST CLIENT note (edited)"
+}
+
+### DELETE ONE NOTE
+
+DELETE http://localhost:3001/api/notes/5

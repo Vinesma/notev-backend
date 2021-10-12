@@ -1,0 +1,9 @@
+build
+coverage
+public
+node_modules
+Dockerfile
+*.json
+*.md
+*.yaml
+*.http
