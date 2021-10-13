@@ -1,6 +1,7 @@
-const Note = require("../../models/note.model");
+import { Request, Response } from "express";
+import { Note } from "../../models";
 
-const updateNote = async (request, response) => {
+const updateNote = async (request: Request, response: Response) => {
     const { id } = request.params;
     const { content } = request.body;
 
@@ -16,4 +17,4 @@ const updateNote = async (request, response) => {
     }
 };
 
-module.exports = { updateNote };
+export { updateNote };

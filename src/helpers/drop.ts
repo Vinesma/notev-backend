@@ -1,5 +1,5 @@
-const sequelize = require("../db/connect");
-const Note = require("../models/note.model");
+import sequelize from "db/connect";
+import { Note } from "models";
 
 const drop = async () => {
     try {

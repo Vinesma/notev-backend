@@ -1,6 +1,7 @@
-const Note = require("../../models/note.model");
+import { Request, Response } from "express";
+import { Note } from "../../models";
 
-const deleteNote = async (request, response) => {
+const deleteNote = async (request: Request, response: Response) => {
     const { id } = request.params;
 
     try {
@@ -12,4 +13,4 @@ const deleteNote = async (request, response) => {
     }
 };
 
-module.exports = { deleteNote };
+export { deleteNote };

@@ -1,6 +1,7 @@
-const Note = require("../../models/note.model");
+import { Request, Response } from "express";
+import { Note } from "../../models";
 
-const addNote = async (request, response) => {
+const addNote = async (request: Request, response: Response) => {
     const { content } = request.body;
 
     try {
@@ -13,4 +14,4 @@ const addNote = async (request, response) => {
     }
 };
 
-module.exports = { addNote };
+export { addNote };

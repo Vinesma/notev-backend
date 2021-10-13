@@ -1,5 +1,5 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../db/connect");
+import { DataTypes } from "sequelize";
+import sequelize from "../db/connect";
 
 const Note = sequelize.define(
     "Note",
@@ -16,9 +16,8 @@ const Note = sequelize.define(
         },
     },
     {
-        sequelize,
         modelName: "Note",
     }
 );
 
-module.exports = Note;
+export default Note;

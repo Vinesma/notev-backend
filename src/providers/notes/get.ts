@@ -1,12 +1,13 @@
-const Note = require("../../models/note.model");
+import { Response, Request } from "express";
+import { Note } from "../../models";
 
-const getAllNotes = async (_, response) => {
+const getAllNotes = async (request: Request, response: Response) => {
     const notes = await Note.findAll();
 
     response.status(200).json(notes);
 };
 
-const getNote = async (request, response) => {
+const getNote = async (request: Request, response: Response) => {
     const { id } = request.params;
     const note = await Note.findByPk(Number(id));
 
@@ -17,4 +18,4 @@ const getNote = async (request, response) => {
     }
 };
 
-module.exports = { getAllNotes, getNote };
+export { getAllNotes, getNote };
