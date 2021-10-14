@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { Note } from "../../models";
+import { User } from "../../models";
 
-const deleteNote = async (request: Request, response: Response) => {
+const deleteUser = async (request: Request, response: Response) => {
     const { id } = request.params;
 
     try {
-        const destroyedRows = await Note.destroy({ where: { id: Number(id) } });
+        const destroyedRows = await User.destroy({ where: { id: Number(id) } });
 
         if (destroyedRows > 0) {
             response.status(204).end();
@@ -17,4 +17,4 @@ const deleteNote = async (request: Request, response: Response) => {
     }
 };
 
-export { deleteNote };
+export { deleteUser };

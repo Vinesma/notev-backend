@@ -1,6 +1,13 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db/connect";
 
+interface NoteType {
+    id: number;
+    content: string;
+}
+
+type NoteCreateType = Omit<NoteType, "id">;
+
 const Note = sequelize.define(
     "Note",
     {
@@ -20,4 +27,4 @@ const Note = sequelize.define(
     }
 );
 
-export default Note;
+export { Note, NoteType, NoteCreateType };

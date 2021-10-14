@@ -1,9 +1,13 @@
-import sequelize from "db/connect";
-import { Note } from "models";
+import * as models from "../models";
 
 const drop = async () => {
     try {
-        await sequelize.drop();
+        let key: keyof typeof models;
+
+        for (key in models) {
+            await models[key].drop();
+        }
+
         console.info("All tables dropped!");
     } catch (error) {
         console.error("An error occurred while dropping!", error);

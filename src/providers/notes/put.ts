@@ -1,7 +1,11 @@
-import { Request, Response } from "express";
-import { Note } from "../../models";
+import { Response } from "express";
+import { Request } from "../../types";
+import { Note, NoteCreateType } from "../../models";
 
-const updateNote = async (request: Request, response: Response) => {
+const updateNote = async (
+    request: Request<NoteCreateType>,
+    response: Response
+) => {
     const { id } = request.params;
     const { content } = request.body;
 
