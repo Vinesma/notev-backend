@@ -1,7 +1,8 @@
-import * as models from "../models";
+import sequelize from "../db/connect";
 
 const drop = async () => {
     try {
+        const { models } = sequelize;
         let key: keyof typeof models;
 
         for (key in models) {

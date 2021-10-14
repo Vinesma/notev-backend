@@ -1,16 +1,22 @@
 import { Response, Request } from "express";
-import { User } from "../../models";
+import sequelize from "../../db/connect";
 
 const getAllUsers = async (request: Request, response: Response) => {
-    const users = await User.findAll({ attributes: { exclude: ["password"] } });
+    const { models } = sequelize;
+    const users = await models.user.findAll({
+        attributes: { exclude: ["password"] },
+        include: models.note,
+    });
 
     response.status(200).json(users);
 };
 
 const getOneUser = async (request: Request, response: Response) => {
+    const { models } = sequelize;
     const { id } = request.params;
-    const user = await User.findByPk(Number(id), {
+    const user = await models.user.findByPk(Number(id), {
         attributes: { exclude: ["password"] },
+        include: models.note,
     });
 
     if (user) {

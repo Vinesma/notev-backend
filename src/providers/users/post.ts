@@ -1,16 +1,25 @@
 import { Response } from "express";
 import { Request } from "../../types";
-import { User, UserCreateType, UserType } from "../../models";
+import { UserCreateType, UserType } from "../../models";
 import { ValidationError } from "sequelize";
+import sequelize from "../../db/connect";
 
 const addUser = async (
     request: Request<UserCreateType>,
     response: Response
 ) => {
+    const { models } = sequelize;
     const user = request.body;
 
+    if (user.id)
+        return response
+            .status(400)
+            .json({
+                error: `Bad request: remove id from body request, id is auto assigned by database.`,
+            });
+
     try {
-        const newUser = await User.create(user);
+        const newUser = await models.user.create(user);
         const newUserNoPassword: Omit<UserType, "password"> = JSON.parse(
             JSON.stringify(newUser),
             (key, value) => {

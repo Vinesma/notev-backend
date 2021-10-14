@@ -1,10 +1,6 @@
 import express from "express";
-import dotenv from "dotenv";
 import { requestLogger, unknownEndpoint } from "./src/middleware";
 import { loginRouter, notesRouter, usersRouter } from "./src/controllers";
-
-const envResult = dotenv.config();
-if (envResult.error) throw Error(".env parse error.");
 
 const app = express();
 const PORT = process.env.PORT || 3001;

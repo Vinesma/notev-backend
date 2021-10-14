@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node index.ts",
-    "dev": "nodemon index.ts",
-    "resync": "ts-node src/helpers/drop.ts && ts-node src/helpers/sync.ts",
+    "start": "ts-node -r dotenv/config index.ts",
+    "dev": "nodemon -r dotenv/config index.ts",
+    "drop-db": "ts-node -r dotenv/config src/helpers/drop.ts",
+    "sync-db": "ts-node -r dotenv/config src/helpers/sync.ts",
+    "resync-db": "npm run drop-db && npm run sync-db",
     "build": "tsc --project ./",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

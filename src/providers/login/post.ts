@@ -1,20 +1,22 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { Response } from "express";
-import { User, UserType } from "../../models";
+import sequelize from "../../db/connect";
+import { UserType } from "../../models";
 import { Request } from "../../types";
 
 type Body = Pick<UserType, "password" | "email">;
 
 const createLogin = async (request: Request<Body>, response: Response) => {
+    const { models } = sequelize;
     const { password, email } = request.body;
 
     try {
-        const user = await User.findOne({ where: { email } });
+        const user = await models.user.findOne({ where: { email } });
         const passwordMatches =
             user === null
                 ? false
-                : await bcrypt.compare(password, user.get("password"));
+                : await bcrypt.compare(password, user.get("password" as any));
 
         if (passwordMatches && user) {
             const tokenPayload = {

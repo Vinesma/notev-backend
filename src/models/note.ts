@@ -1,30 +1,32 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../db/connect";
+import { DataTypes, Optional, Sequelize } from "sequelize";
 
 interface NoteType {
     id: number;
     content: string;
+    userId: number;
 }
 
-type NoteCreateType = Omit<NoteType, "id">;
+type NoteCreateType = Optional<NoteType, "id">;
 
-const Note = sequelize.define(
-    "Note",
-    {
-        id: {
-            type: DataTypes.BIGINT,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true,
+export default (sequelize: Sequelize) => {
+    sequelize.define(
+        "note",
+        {
+            id: {
+                type: DataTypes.BIGINT,
+                allowNull: false,
+                primaryKey: true,
+                autoIncrement: true,
+            },
+            content: {
+                type: DataTypes.TEXT,
+                allowNull: false,
+            },
         },
-        content: {
-            type: DataTypes.TEXT,
-            allowNull: false,
-        },
-    },
-    {
-        modelName: "Note",
-    }
-);
+        {
+            modelName: "note",
+        }
+    );
+};
 
-export { Note, NoteType, NoteCreateType };
+export { NoteType, NoteCreateType };

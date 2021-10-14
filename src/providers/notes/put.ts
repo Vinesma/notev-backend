@@ -1,16 +1,18 @@
 import { Response } from "express";
 import { Request } from "../../types";
-import { Note, NoteCreateType } from "../../models";
+import { NoteCreateType } from "../../models";
+import sequelize from "../../db/connect";
 
 const updateNote = async (
     request: Request<NoteCreateType>,
     response: Response
 ) => {
+    const { models } = sequelize;
     const { id } = request.params;
     const { content } = request.body;
 
     try {
-        const [, updatedNote] = await Note.update(
+        const [, updatedNote] = await models.note.update(
             { content },
             { where: { id: Number(id) }, returning: true }
         );

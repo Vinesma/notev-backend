@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
-import { User } from "../../models";
+import sequelize from "../../db/connect";
 
 const deleteUser = async (request: Request, response: Response) => {
+    const { models } = sequelize;
     const { id } = request.params;
 
     try {
-        const destroyedRows = await User.destroy({ where: { id: Number(id) } });
+        const destroyedRows = await models.user.destroy({
+            where: { id: Number(id) },
+        });
 
         if (destroyedRows > 0) {
             response.status(204).end();

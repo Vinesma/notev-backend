@@ -16,7 +16,8 @@ POST http://localhost:3001/api/notes
 Content-Type: application/json
 
 {
-    "content": "VSCODE TEST CLIENT note"
+    "content": "VSCODE TEST CLIENT note",
+    "userId": 1
 }
 
 ### UPDATE ONE NOTE
