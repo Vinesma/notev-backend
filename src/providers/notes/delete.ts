@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import decodeToken from "../../helpers/decodeToken";
 import sequelize from "../../db/connect";
 
 const deleteNote = async (request: Request, response: Response) => {
@@ -6,8 +7,9 @@ const deleteNote = async (request: Request, response: Response) => {
     const { id } = request.params;
 
     try {
+        const { id: userId } = decodeToken(request.headers);
         const destroyedRows = await models.note.destroy({
-            where: { id: Number(id) },
+            where: { id: Number(id), userId: Number(userId) },
         });
 
         if (destroyedRows > 0) {

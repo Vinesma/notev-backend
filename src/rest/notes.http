@@ -5,25 +5,28 @@ GET http://localhost:3001
 ### GET ALL NOTES
 
 GET http://localhost:3001/api/notes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJuYW1lIjoic29tZXVzZXIiLCJpYXQiOjE2MzQzMzQ3Mjh9.5J2foSv7wW26jXSc5-NSOwB0DUukxyIEdMAX8c6pu_E
 
 ### GET ONE NOTE
 
-GET http://localhost:3001/api/notes/1
+GET http://localhost:3001/api/notes/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJuYW1lIjoic29tZXVzZXIiLCJpYXQiOjE2MzQzMzQ3Mjh9.5J2foSv7wW26jXSc5-NSOwB0DUukxyIEdMAX8c6pu_E
 
 ### ADD ONE NOTE
 
 POST http://localhost:3001/api/notes
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJuYW1lIjoic29tZXVzZXIiLCJpYXQiOjE2MzQzMzQ3Mjh9.5J2foSv7wW26jXSc5-NSOwB0DUukxyIEdMAX8c6pu_E
 
 {
-    "content": "VSCODE TEST CLIENT note",
-    "userId": 1
+    "content": "VSCODE TEST CLIENT note"
 }
 
 ### UPDATE ONE NOTE
 
 PUT http://localhost:3001/api/notes/4
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJuYW1lIjoic29tZXVzZXIiLCJpYXQiOjE2MzQzMzQ3Mjh9.5J2foSv7wW26jXSc5-NSOwB0DUukxyIEdMAX8c6pu_E
 
 {
     "content": "VSCODE TEST CLIENT note (edited)"
@@ -31,4 +34,5 @@ Content-Type: application/json
 
 ### DELETE ONE NOTE
 
-DELETE http://localhost:3001/api/notes/5
+DELETE http://localhost:3001/api/notes/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJuYW1lIjoic29tZXVzZXIiLCJpYXQiOjE2MzQzMzQ3Mjh9.5J2foSv7wW26jXSc5-NSOwB0DUukxyIEdMAX8c6pu_E

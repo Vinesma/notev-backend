@@ -4,9 +4,10 @@ interface NoteType {
     id: number;
     content: string;
     userId: number;
+    pinned: boolean;
 }
 
-type NoteCreateType = Optional<NoteType, "id">;
+type NoteCreateType = Optional<NoteType, "id" | "userId">;
 
 export default (sequelize: Sequelize) => {
     sequelize.define(
@@ -21,6 +22,10 @@ export default (sequelize: Sequelize) => {
             content: {
                 type: DataTypes.TEXT,
                 allowNull: false,
+            },
+            pinned: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: false,
             },
         },
         {

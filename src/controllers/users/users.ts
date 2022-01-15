@@ -5,6 +5,7 @@ import {
     addUser,
     deleteUser,
 } from "../../providers/users";
+import { auth } from "../../middleware";
 
 const router = Router();
 

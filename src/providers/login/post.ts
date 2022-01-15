@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { Response } from "express";
 import sequelize from "../../db/connect";
 import { UserType } from "../../models";
-import { Request } from "../../types";
+import { Request, TokenPayload } from "../../types";
 
 type Body = Pick<UserType, "password" | "email">;
 
@@ -19,9 +19,9 @@ const createLogin = async (request: Request<Body>, response: Response) => {
                 : await bcrypt.compare(password, user.get("password" as any));
 
         if (passwordMatches && user) {
-            const tokenPayload = {
-                id: user.get("id"),
-                name: user.get("name"),
+            const tokenPayload: TokenPayload = {
+                id: user.get("id") as string,
+                name: user.get("name") as string,
             };
 
             if (process.env.SECRET) {

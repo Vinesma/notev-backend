@@ -2,6 +2,7 @@ import { Response } from "express";
 import { Request } from "../../types";
 import { NoteCreateType } from "../../models";
 import sequelize from "../../db/connect";
+import decodeToken from "../../helpers/decodeToken";
 
 const updateNote = async (
     request: Request<NoteCreateType>,
@@ -9,15 +10,23 @@ const updateNote = async (
 ) => {
     const { models } = sequelize;
     const { id } = request.params;
-    const { content } = request.body;
+    const { id: bodyId, userId: bodyUserId, ...note } = request.body;
 
     try {
+        const { id: userId } = decodeToken(request.headers);
         const [, updatedNote] = await models.note.update(
-            { content },
-            { where: { id: Number(id) }, returning: true }
+            { ...note },
+            {
+                where: { id: Number(id), userId: Number(userId) },
+                returning: true,
+            }
         );
 
-        response.status(200).json(updatedNote);
+        if (updatedNote.length > 0) {
+            response.status(200).json(updatedNote);
+        } else {
+            response.status(404).end();
+        }
     } catch (error) {
         response.status(400).json({ error });
     }

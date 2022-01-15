@@ -1,6 +1,7 @@
 import { Response } from "express";
 import { Request } from "../../types";
 import { NoteCreateType } from "../../models";
+import decodeToken from "../../helpers/decodeToken";
 import sequelize from "../../db/connect";
 
 const addNote = async (
@@ -10,17 +11,17 @@ const addNote = async (
     const { models } = sequelize;
     const { body } = request;
 
-    if (body.id)
+    if (body.id || body.userId)
         return response.status(400).json({
-            error: `Bad request: remove id from body request, id is auto assigned by database.`,
+            error: `Bad request: remove id from body request`,
         });
 
     try {
-        const newNote = await models.note.create(body);
+        const { id: userId } = decodeToken(request.headers);
+        const newNote = await models.note.create({ ...body, userId });
 
         response.status(201).json(newNote);
     } catch (error) {
-        console.error(error);
         response.status(400).json({ error });
     }
 };

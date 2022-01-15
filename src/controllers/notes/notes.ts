@@ -6,9 +6,11 @@ import {
     updateNote,
     deleteNote,
 } from "../../providers/notes";
+import { auth } from "../../middleware";
 
 const router = Router();
 
+router.use(auth);
 router.get("/", getAllNotes);
 router.get("/:id", getNote);
 router.post("/", addNote);
